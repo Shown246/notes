@@ -46,6 +46,10 @@ label { display: block; margin: 18px 0 7px; font-size: 12px; font-weight: 600; c
 fieldset > label:first-child { margin-top: 0; }
 input, textarea, select { display: block; width: 100%; min-height: 44px; border: 1px solid #d8dfd6; border-radius: 7px; background: #fcfdfb; padding: 10px 12px; color: var(--ink); font-size: 14px; }
 input:hover, textarea:hover, select:hover { border-color: #a7b7a3; }
+.password-field { position: relative; }
+.password-field input { padding-right: 52px; }
+.password-toggle { position: absolute; right: 1px; top: 1px; bottom: 1px; width: 44px; padding: 0; display: grid; place-items: center; border: 0; background: transparent; color: var(--muted); border-radius: 6px; }
+.password-toggle svg { width: 20px; height: 20px; }
 textarea { min-height: 220px; resize: vertical; line-height: 1.7; }
 form button[type="submit"], main > button:first-of-type { background: var(--green); color: white; border-color: var(--green); }
 form button[type="submit"] { margin-top: 26px; }

@@ -81,7 +81,42 @@ function form(parent, ctx, fields, submitText, save) {
     if (field.min) input.minLength = field.min;
     if (field.autocomplete) input.autocomplete = field.autocomplete;
     input.disabled = field.disabled || false;
-    fieldset.append(label, input);
+    fieldset.append(label);
+    if (field.type === 'password') {
+      const wrapper = element('div', undefined, 'password-field');
+      const toggle = button('', () => {
+        input.type = input.type === 'password' ? 'text' : 'password';
+        updateToggle();
+      });
+      toggle.className = 'password-toggle';
+      toggle.setAttribute('aria-controls', input.id);
+      const icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      icon.setAttribute('viewBox', '0 0 24 24');
+      icon.setAttribute('fill', 'none');
+      icon.setAttribute('stroke', 'currentColor');
+      icon.setAttribute('stroke-width', '1.8');
+      icon.setAttribute('aria-hidden', 'true');
+      for (const path of ['M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z', 'M9 12a3 3 0 1 0 6 0 3 3 0 0 0-6 0']) {
+        const shape = document.createElementNS(icon.namespaceURI, 'path');
+        shape.setAttribute('d', path);
+        icon.append(shape);
+      }
+      const slash = document.createElementNS(icon.namespaceURI, 'path');
+      slash.setAttribute('d', 'M3 3 21 21');
+      icon.append(slash);
+      toggle.append(icon);
+      function updateToggle() {
+        const visible = input.type === 'text';
+        toggle.setAttribute('aria-label', visible ? 'Hide password' : 'Show password');
+        toggle.title = visible ? 'Hide password' : 'Show password';
+        slash.style.display = visible ? '' : 'none';
+      }
+      updateToggle();
+      wrapper.append(input, toggle);
+      fieldset.append(wrapper);
+    } else {
+      fieldset.append(input);
+    }
     inputs[field.name] = input;
   }
   const submit = element('button', submitText);
