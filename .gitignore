@@ -1,0 +1,18 @@
+node_modules/
+dist/
+coverage/
+.env
+.env.*
+!.env.example
+*.log
+.cache/
+# Legacy workspace archive; submit current reviewed source instead.
+notes.zip
+.DS_Store
+Thumbs.db
+# Local testing account credentials
+/demo-credentials.txt
+architecture.md
+Backend Interview Task.md
+implementation-plan.md
+docs/

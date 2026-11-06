@@ -1,0 +1,60 @@
+{
+  "name": "secure-notes",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "overrides": {
+    "minimatch": "11.0.1"
+  },
+  "config": {
+    "mongodbMemoryServer": {
+      "disablePostinstall": true,
+      "version": "8.0.34"
+    }
+  },
+  "engines": {
+    "node": ">=24.18.0 <25",
+    "npm": ">=11 <12"
+  },
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc -p tsconfig.build.json",
+    "start": "node dist/server.js",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --max-warnings 0",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:browser": "vitest run --config vitest.browser.config.ts",
+    "db:up": "docker compose up -d --wait",
+    "db:down": "docker compose down",
+    "db:indexes": "tsx scripts/ensure-indexes.ts",
+    "admin:create": "tsx scripts/create-admin.ts",
+    "auth:benchmark": "tsx scripts/benchmark-password.ts",
+    "db:explain": "tsx scripts/explain-queries.ts",
+    "db:seed": "tsx scripts/seed-demo.ts"
+  },
+  "dependencies": {
+    "argon2": "0.45.2",
+    "dotenv": "18.0.9",
+    "express": "5.3.0",
+    "helmet": "8.3.0",
+    "jose": "6.2.15",
+    "mongoose": "9.11.4",
+    "pino": "10.4.0",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@playwright/test": "1.64.1",
+    "@types/express": "5.0.6",
+    "@types/node": "24.19.2",
+    "@types/supertest": "7.2.1",
+    "eslint": "10.14.0",
+    "mongodb-memory-server": "11.3.0",
+    "supertest": "7.3.1",
+    "tsx": "4.23.15",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.72.1",
+    "vitest": "5.1.0"
+  }
+}
